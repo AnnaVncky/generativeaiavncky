@@ -1,11 +1,3 @@
-SELECT DISTINCT TOP 10 [Total Including Tax], [Stock Item Key], [Quantity]  FROM [Fact].[Sale] ORDER BY [Total Including Tax] DESC
-
-  select TOP 10 [Stock Item Key], sum([Total Including Tax]), count([Quantity]), DATEPART(QQ, [Invoice Date Key]) AS [QUARTER], DATEPART (YY, [Invoice Date Key]) AS [YEAR]
-       from [Fact].[Sale] 
-       group by [Stock Item Key], [QUARTER], [YEAR]
-       order by sum([Total Including Tax]) desc, count([Quantity]) desc
-       
-
 SELECT RANK() OVER (PARTITION BY [QUARTER], [YEAR]
                             ORDER BY [SalesRevenue] desc) AS PROFIT_RANK_BY_Q, 
                 [Stock Item Key], [SalesQuantity], [SalesRevenue], [QUARTER], [YEAR]
